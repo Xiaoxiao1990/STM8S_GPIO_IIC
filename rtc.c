@@ -7,14 +7,14 @@
 #define OUT 0
 #define ACK 0x00
 #define NACK 0x01
-#define SDA_O 				PC_ODR_5
-#define SDA_I					PC_IDR_5
-#define SCL 		  		PC_ODR_4
+#define SDA_O 		PC_ODR_5
+#define SDA_I		PC_IDR_5
+#define SCL 		PC_ODR_4
 
-//Device write Address
+//Device Address & opreation
 #define PCF8563		0xA2
-#define WRITE			0x00
-#define READ			0x01
+#define WRITE		0x00
+#define READ		0x01
 //RTC RAM map
 #define RTC_CR1		0x00
 #define RTC_CR2		0x01
@@ -51,6 +51,7 @@ void SET_SDA(uchar s)
 	}
 }
 /*delay t us*/
+//时间不需要很严格
 void delay(uchar t)
 {
 	char i = -10;
@@ -242,11 +243,19 @@ void _RTC_Init(void)
 	writeByte(RTC_CR1,0x00);//Run RTC
 }
 /*Get Time*/
+/*
+需引入外部结构体:
+struct TimeType_Def{
+uchar hour;
+uchar minute;
+uchar second;
+}
+*/
 void _getTime(void)
 {
-	if((MachineStatus == SETTING)&&(SetMode == TIME_SET))return;
+//	if((MachineStatus == SETTING)&&(SetMode == TIME_SET))return;
 	readRTC();
-	//Now.Second = BCD2DEC(RTC_RAM[2]&0x7f);
+	Now.Second = BCD2DEC(RTC_RAM[2]&0x7f);
 	Now.Minute = BCD2DEC(RTC_RAM[3]&0x7f);
 	Now.Hour = BCD2DEC(RTC_RAM[4]&0x3f);
 }
