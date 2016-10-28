@@ -3,10 +3,10 @@
 此头文件包含GPIO寄存器定义
 */
 
-#define IN 	1
-#define OUT 0
-#define ACK 0x00
-#define NACK 0x01
+#define IN 		1
+#define OUT 		0
+#define ACK 		0x00
+#define NACK 		0x01
 #define SDA_O 		PC_ODR_5
 #define SDA_I		PC_IDR_5
 #define SCL 		PC_ODR_4
