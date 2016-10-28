@@ -246,9 +246,9 @@ void _RTC_Init(void)
 /*
 需引入外部结构体:
 struct TimeType_Def{
-uchar hour;
-uchar minute;
-uchar second;
+uchar Hour;
+uchar Minute;
+uchar Second;
 }
 */
 void _getTime(void)
@@ -264,6 +264,6 @@ void _setTime(void)
 {
 	writeByte(RTC_HOU,DEC2BCD(Now.Hour));
 	writeByte(RTC_MIN,DEC2BCD(Now.Minute));
-	writeByte(RTC_SEC,DEC2BCD(0));
+	writeByte(RTC_SEC,DEC2BCD(Now.Second));
 	writeByte(RTC_CR1,0x00);//Run RTC
 }
